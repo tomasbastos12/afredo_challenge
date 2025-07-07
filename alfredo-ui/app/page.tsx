@@ -1,4 +1,18 @@
-import Image from "next/image";
+// app/page.tsx
+import { redirect } from "next/navigation";
+
+export default function HomePage() {
+  redirect("/home");
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-semibold">Welcome to Alfredo Dashboard</h1>
+      <p className="text-muted-foreground text-sm mt-2">Choose a section from the sidebar.</p>
+    </div>
+  );
+}
+
+
+/* import Image from "next/image";
 
 export default function Home() {
   return (
@@ -101,3 +115,4 @@ export default function Home() {
     </div>
   );
 }
+ */

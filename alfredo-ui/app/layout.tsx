@@ -1,4 +1,36 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import "./globals.css";
+import { ReactNode } from "react";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils"; // comes from ShadCN
+import Sidebar from "@/components/sidebar";
+import Footer from "@/components/footer";
+
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "Alfredo App",
+  description: "Alfredo Dashboard Layout",
+};
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={cn(inter.className, "flex min-h-screen")}>
+        <Sidebar />
+        <div className="ml-80 flex-1 flex flex-col">
+          <main className="flex-1 p-4 bg-muted/40">{children}</main>
+          <Footer />
+        </div>
+      </body>
+    </html>
+  );
+}
+
+
+
+/* import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -31,4 +63,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} */
