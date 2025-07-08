@@ -3,8 +3,8 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils"; // comes from ShadCN
-import Sidebar from "@/components/sidebar";
-import Footer from "@/components/footer";
+import Sidebar from "@/components/ui/sidebar";
+import Footer from "@/components/ui/footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
