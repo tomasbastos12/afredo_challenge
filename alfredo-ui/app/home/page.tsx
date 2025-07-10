@@ -1,128 +1,106 @@
 "use client"
 
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs"
-
-import { Button } from "@/components/ui/button"
-import { Pencil, MoreHorizontal } from "lucide-react"
+  Plus,
+  Search,
+  BarChart,
+  Users,
+  CreditCard,
+  Settings,
+  Store,
+  Globe,
+  Building,
+  Mail,
+} from "lucide-react"
 
 export default function HomePage() {
+  const solutionsDayToDay = [
+    { title: "Criar novo estudo de mercado", desc: "Crie estudos de mercado para imóveis residenciais...", icon: Plus },
+    { title: "Procurar imóveis", desc: "Procure por qualquer imóvel e conheça todo o seu histórico", icon: Search },
+    { title: "Estatísticas de mercado", desc: "Aceda a estatísticas e tendências únicas para qualquer zona", icon: BarChart },
+    { title: "Procurar imóveis de particulares", desc: "Procure imóveis de particulares e conheça todo o seu histórico", icon: Users },
+    { title: "Pesquisar imóveis da banca", desc: "Procure imóveis da banca e conheça todo o seu histórico", icon: CreditCard },
+    { title: "Alterar logótipo", desc: "Customize os relatórios com o seu logótipo", icon: Settings },
+    { title: "Alertas", desc: "Guarde as suas pesquisas e receba alertas de novos imóveis", icon: Mail },
+    { title: "Favoritos", desc: "Agrupe imóveis numa lista de favoritos", icon: Store },
+    { title: "Coleções", desc: "Agrupe imóveis numa coleção partilhável", icon: Globe },
+  ]
+
+  const automationSolutions = [
+    { title: "Gestão de portfólio", desc: "Analise e monitore todos os seus portfólios imobiliários", icon: Building },
+    { title: "Análise de risco", desc: "Compare a performance dos seus ativos com o mercado", icon: BarChart },
+    { title: "Encontre oportunidades", desc: "Identifique novos investimentos anteriormente escondidos", icon: Search },
+    { title: "Customização de AVMs", desc: "Tecnologia de Inteligência Artificial de última geração", icon: Settings },
+    { title: "Observatório de dados", desc: "Ganhe uma intuição única sobre o mercado", icon: BarChart },
+    { title: "Avaliador online (leads)", desc: "Gere novas leads de vendedor e converta-as em análises", icon: Mail },
+  ]
+
   return (
     <div className="p-6 space-y-6">
-      {/* ✅ Breadcrumb */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Accounts</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      {/* Header */}
+      <div className="flex justify-between items-start flex-wrap gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold">Início</h1>
+          <p className="text-sm text-muted-foreground">Início &gt; Início</p>
+        </div>
+        <div className="flex gap-4">
+          <button className="bg-[#ec1463] text-white text-sm px-4 py-2 rounded-md flex items-center gap-2">
+            <Search className="w-4 h-4" />
+            Metasearch
+          </button>
 
-      {/* ✅ Page Title + Action */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">Accounts</h1>
-        <Button variant="link" size="sm" className="text-primary">
-          + Add new company
-        </Button>
+          <button className="bg-[#00a5ff] text-white text-sm px-4 py-2 rounded-md flex items-center gap-2">
+            <Plus className="w-4 h-4" />
+            Novo Estudo de Mercado
+          </button>
+        </div>
       </div>
 
-      {/* ✅ Tabs */}
-      <Tabs defaultValue="companies" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="companies">Companies</TabsTrigger>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="ranking">Ranking</TabsTrigger>
-        </TabsList>
-
-        {/* ✅ Companies List */}
-        <TabsContent value="companies">
-          <div className="space-y-4">
-            {/* Table Header */}
-            <div className="grid grid-cols-5 text-sm font-semibold text-muted-foreground px-4">
-              <div>Company</div>
-              <div>Activity</div>
-              <div>Members</div>
-              <div>Limit</div>
-              <div className="text-right">Actions</div>
-            </div>
-
-            {/* List Item Example */}
-            {[...Array(3)].map((_, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-5 items-center bg-muted/50 p-4 rounded-md text-sm"
-              >
-                {/* Company Info */}
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/logo-alfredo-black.png"
-                    alt="Company Logo"
-                    className="w-8 h-8 rounded"
-                  />
-                  <div>
-                    <p className="font-medium">Alfredo Inc.</p>
-                    <p className="text-xs text-muted-foreground">Company</p>
-                  </div>
-                </div>
-                <div>Active</div>
-                <div>12</div>
-                <div>50</div>
-
-                <div className="flex justify-end gap-2">
-                  <Button variant="ghost" size="icon">
-                    <Pencil className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="w-4 h-4" />
-                  </Button>
-                </div>
+      {/* Soluções para o dia-a-dia */}
+      <section>
+        <h2 className="text-base font-semibold mb-4">Soluções para o dia-a-dia – Produtos</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {solutionsDayToDay.map(({ title, desc, icon: Icon }) => (
+            <button
+              key={title}
+              className="w-full text-left bg-white p-4 rounded-xl shadow-sm border flex gap-4 items-start hover:bg-gray-50 transition cursor-pointer"
+              disabled
+            >
+              <div className="p-2 rounded-md bg-blue-100 text-blue-600">
+                <Icon className="w-5 h-5" />
               </div>
-            ))}
-          </div>
+              <div>
+                <p className="font-semibold">{title}</p>
+                <p className="text-muted-foreground text-xs">{desc}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
 
-          {/* Pagination Footer */}
-          <div className="mt-6 flex justify-between items-center text-sm text-muted-foreground px-4">
-            <div>
-              Rows per page:
-              <select className="ml-2 border rounded px-1 py-0.5">
-                <option>10</option>
-                <option>25</option>
-                <option>50</option>
-              </select>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>1–10 of 30</span>
-              <Button variant="ghost" size="icon">←</Button>
-              <Button variant="ghost" size="icon">→</Button>
-            </div>
-          </div>
-        </TabsContent>
+      {/* Soluções de automação */}
+      <section>
+        <h2 className="text-base font-semibold mb-4 mt-6">Soluções de automação – Serviços</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {automationSolutions.map(({ title, desc, icon: Icon }) => (
+            <button
+              key={title}
+              className="w-full text-left bg-white p-4 rounded-xl shadow-sm border flex gap-4 items-start hover:bg-gray-50 transition cursor-pointer"
+              disabled
+            >
+              <div className="p-2 rounded-md bg-yellow-100 text-yellow-600">
+                <Icon className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-semibold">{title}</p>
+                <p className="text-muted-foreground text-xs">{desc}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
 
-        <TabsContent value="overview">
-          <p>Overview section content...</p>
-        </TabsContent>
-
-        <TabsContent value="ranking">
-          <p>Ranking section content...</p>
-        </TabsContent>
-      </Tabs>
+      
     </div>
   )
 }

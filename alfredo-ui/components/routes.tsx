@@ -30,28 +30,28 @@ export type RouteItem = {
 
 export const ROUTES: Record<string, RouteItem> = {
   home: {
-    id: "Home",
+    id: "Início",
     icon: <Home className="w-6 h-6" />,
     href: "/home",
   },
   Group: {
-    id: "Group",
+    id: "Grupo",
     icon: <Grip className="w-6 h-6" />,
     href: "/group"
   },
   Agency: {
-    id: "Agency",
+    id: "Agência",
     icon: <ShieldUser className="w-6 h-6" />,
     href: "/agency"
   },
 
   activity: {
-    id: "Activity",
+    id: "Atividade",
     icon: <Activity className="w-6 h-6" />,
     href: "/activity",
   },
   users: {
-    id: "Users",
+    id: "Utilizadores",
     icon: <Users className="w-6 h-6" />,
     href: "/Users",
   },
@@ -61,7 +61,7 @@ export const ROUTES: Record<string, RouteItem> = {
     href: "/leads",
   },
   Subscriptions: {
-    id: "Subscriptions",
+    id: "Subscrições",
     icon: <PiggyBank className="w-6 h-6" />,
     href: "/subscriptions",
   },
@@ -71,22 +71,22 @@ export const ROUTES: Record<string, RouteItem> = {
     href: "/website",
   },
   store: {
-    id: "Store",
+    id: "Loja",
     icon: <Store className="w-6 h-6" />,
     href: "/store",
   },
   account: {
-    id: "Account",
+    id: "Conta",
     icon: <UserCog className="w-6 h-6" />,
     href: "/account", // still clickable
     dropdownItems: [
       {
-        id: "Settings",
+        id: "Definições",
         icon: <Settings className="w-6 h-6" />,
         href: "/settings",
       },
       {
-        id: "Billing",
+        id: "Faturação",
         icon: <BadgeDollarSign className="w-6 h-6" />,
         href: "/billing",
       },
@@ -96,12 +96,12 @@ export const ROUTES: Record<string, RouteItem> = {
         href: "/roadmap",
       },
       {
-        id: "Help",
+        id: "Ajuda",
         icon: <HelpCircle className="w-6 h-6" />,
         action: "help",
       },
       {
-        id: "Logout",
+        id: "Terminar Sessão",
         icon: <LogOut className="w-6 h-6" />,
         action: "logout",
       },

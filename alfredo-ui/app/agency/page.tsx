@@ -171,7 +171,7 @@ export default function GroupPage() {
 
   return (
     <div className="p-6 space-y-6 ml-6">
-      <h1 className="text-2xl font-semibold">Grupo</h1>
+      <h1 className="text-2xl font-semibold">Agência</h1>
 
       {/* Breadcrumb */}
       <Breadcrumb>
@@ -181,29 +181,15 @@ export default function GroupPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Grupo</BreadcrumbPage>
+            <BreadcrumbPage>Agência</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Page Title + Action */}
-      <div className="flex justify-between items-center">
-        <Button variant="link" size="sm" className="text-sky-400 font-medium hover:underline">
-          + Adicionar nova empresa
-        </Button>
-      </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="companies" className="space-y-4">
+      <Tabs defaultValue="overview" className="space-y-4">
         <TabsList className="bg-transparent flex gap-2 w-fit h-12">
-          <TabsTrigger
-            value="companies"
-            className="data-[state=active]:bg-black data-[state=active]:text-white 
-                      bg-transparent text-muted-foreground px-4 py-2 rounded-md 
-                      transition-colors text-sm font-medium"
-          >
-            Agências
-          </TabsTrigger>
           <TabsTrigger
             value="overview"
             className="data-[state=active]:bg-black data-[state=active]:text-white 
@@ -211,6 +197,14 @@ export default function GroupPage() {
                       transition-colors text-sm font-medium"
           >
             Sumário
+          </TabsTrigger>
+          <TabsTrigger
+            value="activities"
+            className="data-[state=active]:bg-black data-[state=active]:text-white 
+                      bg-transparent text-muted-foreground px-4 py-2 rounded-md 
+                      transition-colors text-sm font-medium"
+          >
+            Ativatide
           </TabsTrigger>
           <TabsTrigger
             value="ranking"
@@ -223,7 +217,7 @@ export default function GroupPage() {
         </TabsList>
 
         {/* Companies List */}
-        <TabsContent value="companies">
+        <TabsContent value="overview">
           <div className="space-y-4">
             {/* Table Header */}
             <div className="flex items-center justify-between px-2 pt-2">
@@ -294,96 +288,16 @@ export default function GroupPage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="overview">
+        <TabsContent value="activities">
           <p>Sumário</p>
         </TabsContent>
 
         <TabsContent value="ranking">
-          {/* Table Header */}
-            <div className="flex items-center justify-between px-2 pt-2">
-                {/* Left side: Title and Select */}
-                <div className="flex items-center">
-                  <h2 className="text-lg font-semibold text-foreground">Ranking</h2>
-                  <select className="ml-2 text-base px-1 py-0.5 bg-transparent outline-none">
-                    <option>Ano</option>
-                    <option>Mês</option>
-                    <option>Semana</option>
-                  </select>
-                </div>
-
-                {/* Right side */}
-                <div className="flex items-center gap-4 text-muted-foreground">
-                  <button className="hover:text-foreground">
-                    <Search className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-          <RankingTable />
-          {/* Pagination Footer */}
-          <div className="mt-6 flex justify-end px-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-6">
-              {/* Rows per page */}
-              <div>
-                Rows per page:
-                <select
-                  className="ml-2 border rounded px-1 py-0.5"
-                  value={rowsPerPage}
-                  onChange={(e) => setRowsPerPage(Number(e.target.value))}
-                >
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  <option value={25}>25</option>
-                  <option value={50}>50</option>
-                </select>
-              </div>
-
-              {/* Pagination Info & Controls */}
-              <div className="flex items-center gap-2">
-                <span>{start}–{end} of {totalItems}</span>
-                <Button variant="ghost" size="icon">←</Button>
-                <Button variant="ghost" size="icon">→</Button>
-              </div>
-            </div>
-          </div>
+         
+          
         </TabsContent>
       </Tabs>
     </div>
   )
 }
 
-
-
-
-
-/* {/* List Item Example }
-            {[...Array(3)].map((_, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-5 items-center bg-muted/50 p-4 rounded-md text-sm"
-              >
-                {/* Company Info }
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/logo-alfredo-black.png"
-                    alt="Company Logo"
-                    className="w-8 h-8 rounded"
-                  />
-                  <div>
-                    <p className="font-medium">Alfredo Inc.</p>
-                    <p className="text-xs text-muted-foreground">Company</p>
-                  </div>
-                </div>
-                <div>Active</div>
-                <div>12</div>
-                <div>50</div>
-
-                <div className="flex justify-end gap-2">
-                  <Button variant="ghost" size="icon">
-                    <Pencil className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <MoreHorizontal className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            ))} */
