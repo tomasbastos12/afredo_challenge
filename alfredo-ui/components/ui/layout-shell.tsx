@@ -25,7 +25,9 @@ export function PageShell({ title, children, isLoading, className }: PageShellPr
   const parts = pathname.split("/").filter(Boolean)
 
   return (
-    <div className={cn("p-6 space-y-6", className)}>
+    <div className={cn("p-6 space-y-6 ml-6", className)}>
+      {/*Page Title */}
+      <h1 className="text-2xl font-semibold mb-1">{title}</h1>
       {/*Dynamic Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
@@ -41,8 +43,7 @@ export function PageShell({ title, children, isLoading, className }: PageShellPr
         </BreadcrumbList>
         </Breadcrumb>
 
-      {/*Page Title */}
-      <h1 className="text-2xl font-semibold">{title}</h1>
+      
 
       {/*Content or Skeleton */}
       {isLoading ? (

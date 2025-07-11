@@ -1,10 +1,10 @@
 import { PageShell } from "@/components/ui/layout-shell"
 
-export default function GroupPage() {
+export default function UsersPage() {
   return (
-    <PageShell title="Home" isLoading={true}>
+    <PageShell title="Utilizadores" isLoading={true}>
       {/* Your page content goes here */}
-      <p>This is the home page content</p>
+      <p>This is the users page content</p>
     </PageShell>
   )
 }

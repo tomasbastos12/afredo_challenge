@@ -8,12 +8,13 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useSidebar } from "@/components/sidebarContext";
 
 export default function Sidebar() {
   const pathname = usePathname(); //
   const [accountOpen, setAccountOpen] = useState(false);  //estados da sidebar, começa com a sidebar fechada
   const [language, setLanguage] = useState("pt"); // estado para o idioma selecionado
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, toggleCollapsed } = useSidebar();
   const userInfo = {
     accountType: "admin",
     subscriptionInfo: {
@@ -158,7 +159,7 @@ export default function Sidebar() {
             variant="ghost"
             onClick={() => {
               if (collapsed) {
-                setCollapsed(false); // Expand the sidebar
+                toggleCollapsed();   // Expand the sidebar
                 setAccountOpen(true); // Open the dropdown after expanding
               } else {
                 setAccountOpen(!accountOpen); // Toggle if already expanded
@@ -207,7 +208,7 @@ export default function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={toggleCollapsed}
         className="mt-4"
       >
         {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
