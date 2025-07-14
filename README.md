@@ -30,7 +30,7 @@ Visit http://localhost:3000 in your browser to view the app.
 This project was developed on windows using VScode and Next.js v15.3.5
 
 ### 1. Project structure
-
+```bash
 alfredo_challenge/
   alfredo-ui/
     app/                   # Main Next.js app routes
