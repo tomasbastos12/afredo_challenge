@@ -123,18 +123,24 @@ export default function GroupPage() {
     return () => clearTimeout(timer);
   }, [])
 
-  const companies = [
-    { logo: "/assets/iad-portugal-logo.png", name: "iad Portugal", subtitle: "Empresa", activity: "---", members: "1025", limitPercent: 100 },
-    { logo: "/assets/iad-espanha-logo.png", name: "iad Espana", subtitle: "Empresa", activity: "---", members: "714", limitPercent: 100 },
-    { logo: "/assets/remax-portugal.png", name: "RE/MAX Portugal", subtitle: "Empresa", activity: "---", members: "141", limitPercent: 100 },
-    { logo: "/assets/Century-21-logo.png", name: "CENTURY 21 Portugal", subtitle: "Empresa", activity: "---", members: "132", limitPercent: 100 },
-    { logo: "/assets/noow.jpg", name: "NOOW", subtitle: "Empresa", activity: "---", members: "137", limitPercent: 100 },
-  ]
+ const companies = [
+  { logo: "/assets/iad-portugal-logo.png", name: "iad Portugal", subtitle: "Empresa", activity: "---", memberCount: 1025, memberLimit: 1500 },
+  { logo: "/assets/iad-espanha-logo.png", name: "iad Espana", subtitle: "Empresa", activity: "---", memberCount: 714, memberLimit: 1200 },
+  { logo: "/assets/remax-portugal.png", name: "RE/MAX Portugal", subtitle: "Empresa", activity: "---", memberCount: 141, memberLimit: 500 },
+  { logo: "/assets/Century-21-logo.png", name: "CENTURY 21 Portugal", subtitle: "Empresa", activity: "---", memberCount: 132, memberLimit: 300 },
+  { logo: "/assets/noow.jpg", name: "NOOW", subtitle: "Empresa", activity: "---", memberCount: 137 },
+];
+const computedCompanies = companies.map((c) => ({
+  ...c,
+  members: c.memberLimit ? `${c.memberCount} / ${c.memberLimit}` : `${c.memberCount} / ∞`,
+  limitPercent: c.memberLimit ? Math.min((c.memberCount / c.memberLimit) * 100, 100) : 100,
+}));
 
-  const sortedCompanies = [...companies].sort((a, b) => {
-    const aMembers = parseInt(a.members.split("/")[0].trim(), 10)
-    const bMembers = parseInt(b.members.split("/")[0].trim(), 10)
-    return sortOrder === "asc" ? aMembers - bMembers : bMembers - aMembers
+
+  const sortedCompanies = [...computedCompanies].sort((a, b) => {
+    const aMembers = a.memberCount;
+    const bMembers = b.memberCount;
+    return sortOrder === "asc" ? aMembers - bMembers : bMembers - aMembers;
   })
 
   const start = (currentPage - 1) * rowsPerPage + 1;

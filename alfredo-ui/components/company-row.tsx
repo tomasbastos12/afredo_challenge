@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Pencil, MoreHorizontal } from "lucide-react"
+import { Pencil} from "lucide-react"
 
 type CompanyRowProps = {
   logo: string
@@ -26,9 +26,9 @@ export function CompanyRow({ logo, name, subtitle, activity, members, limitPerce
       <div className="text-muted-foreground text-sm text-right">{activity}</div>
 
       {/* Members */}
-      <div className="text-muted-foreground text-sm text-right">{members} / ∞</div>
+      <div className="text-muted-foreground text-sm text-right">{members} </div>
 
-      {/* Limit (progress bar) */}
+      {/* barra de progresso*/}
       <div className="text-center">
         <div className="inline-block w-20 h-2 bg-gray-200 rounded-full overflow-hidden ">
           <div
@@ -43,9 +43,6 @@ export function CompanyRow({ logo, name, subtitle, activity, members, limitPerce
         <Button variant="ghost" size="icon">
           <Pencil className="w-4 h-4" />
         </Button>
-        {/* <Button variant="ghost" size="icon">
-          <MoreHorizontal className="w-4 h-4" />
-        </Button> */}
       </div>
     </div>
   )

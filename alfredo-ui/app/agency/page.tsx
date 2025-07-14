@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+//import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useEffect, useState } from "react"
 import { BarChart, Bar, XAxis, ResponsiveContainer, Cell, ReferenceArea  } from "recharts"
 
@@ -74,17 +74,13 @@ export default function AgencySummaryPage() {
         </TabsList>
 
         <TabsContent value="summary">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center  mb-4">
             <h2 className="text-base font-semibold">Sumário</h2>
-            <Select defaultValue="year">
-              <SelectTrigger className="w-[120px] h-8 text-sm">
-                <SelectValue placeholder="Ano" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="year">Ano</SelectItem>
-                <SelectItem value="month">Mês</SelectItem>
-              </SelectContent>
-            </Select>
+            <select className="ml-2 text-base px-1 py-0.5 bg-transparent outline-none">
+                <option>Ano</option>
+                <option>Mês</option>
+                <option>Semana</option>
+            </select>
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow-sm mr-8">
@@ -108,7 +104,7 @@ export default function AgencySummaryPage() {
                 )}
 
                 <p className="text-sm text-muted-foreground mb-4">
-                  {selectedMonthIndex !== null ? `${chartData[selectedMonthIndex].name}, ` : "julho, 2024 - julho, 2025"}
+                  {selectedMonthIndex !== null ? `${chartData[selectedMonthIndex].name}` : "julho, 2024 - julho, 2025"}
                 </p>
 
                 <ResponsiveContainer width="100%" height={240} className="border-none">
