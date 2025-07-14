@@ -32,18 +32,15 @@ This project was developed on windows using VScode and Next.js v15.3.5
 ### 1. Project structure
 
 alfredo_challenge/
-│
-├── app/                   # Main Next.js app routes
-│   ├── agency/            # Agency summary page
-│   ├── group/             # Group management page
-│   └── layout.tsx         # Shared layout with sidebar
-│
-├── components/
-│   ├── ui/                # ShadCN UI components and some costume
-│   ├── sidebar.tsx        # Sidebar navigation
-│   ├── company-row.tsx    # Company row for /group/page.tsx
-│   ├── routes.tsx         # Route definitions
-│
-├── public/                # Static assets (images, logos)
-│
-└──styles/                # Global styles (Tailwind)           
+  alfredo-ui/
+    app/                   # Main Next.js app routes
+      agency/            # Agency summary page
+      group/             # Group management page
+      layout.tsx         # Shared layout with sidebar
+    components/
+      ui/                # ShadCN UI components and some costume
+      sidebar.tsx        # Sidebar navigation
+      company-row.tsx    # Company row for /group/page.tsx
+      routes.tsx         # Route definitions      
+    public/                # Static assets (images, logos)
+    styles/                # Global styles (Tailwind)           
