@@ -12,7 +12,7 @@ cd alfredo-ui
 ```bash
 npm run dev
 ```
-or Build the app for production and start
+or build the app for production and start
 ```bash
 npm run build
 npm run start
