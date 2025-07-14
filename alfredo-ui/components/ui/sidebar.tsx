@@ -8,21 +8,22 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useSidebar } from "@/components/sidebarContext";
 
 export default function Sidebar() {
   const pathname = usePathname(); //
   const [accountOpen, setAccountOpen] = useState(false);  //estados da sidebar, começa com a sidebar fechada
-  const [language, setLanguage] = useState("pt"); // estado para o idioma selecionado
-  const [collapsed, setCollapsed] = useState(false);
-  const userInfo = {
+  //const [language, setLanguage] = useState("pt"); // estado para o idioma selecionado
+  const { collapsed, toggleCollapsed } = useSidebar();
+  /* const userInfo = {
     accountType: "admin",
     subscriptionInfo: {
       status: "active",
       product: "pro_enterprise",
     },
-  };
+  }; */
 
-  const handleAction = (action: string) => {
+  /* const handleAction = (action: string) => {
     switch (action) {
       case "logout":
         console.log("Logging out...");
@@ -33,7 +34,7 @@ export default function Sidebar() {
       default:
         console.log(`Unhandled action: ${action}`);
     }
-  };
+  }; */
   const renderLink = (
     id: string,
     href?: string,
@@ -106,9 +107,9 @@ export default function Sidebar() {
       collapsed ? "w-22" : "w-80"
     )}
   >
-    {/* Scrollable Content */}
+    {/* para dar scroll na barra */}
     <div className="flex-1 overflow-y-auto">
-      {/* Top: Logo */}
+      {/* Top Logo da empresa quando expandida e collapsed*/}
       <div className="p-4 flex items-center justify-between h-[64px] mt-6">
         {collapsed ? (
           <img src="assets/logo-icon.png" alt="Logo" className="h-10 w-10 ml-2" />
@@ -117,7 +118,7 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* Avatar */}
+      {/* Avatar da conta*/}
       <div
         className={cn(
           "px-4 py-2 h-[72px] flex items-center mt-8",
@@ -152,13 +153,13 @@ export default function Sidebar() {
           return renderLink(route.id, route.href, route.icon, route.id, route.action);
         })}
 
-        {/* Account Dropdown */}
+        {/* botão da conta*/}
         <div key="account">
           <Button
             variant="ghost"
             onClick={() => {
               if (collapsed) {
-                setCollapsed(false); // Expand the sidebar
+                toggleCollapsed();   // Expand the sidebar
                 setAccountOpen(true); // Open the dropdown after expanding
               } else {
                 setAccountOpen(!accountOpen); // Toggle if already expanded
@@ -207,7 +208,7 @@ export default function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={toggleCollapsed}
         className="mt-4"
       >
         {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}

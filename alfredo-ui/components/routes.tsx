@@ -53,7 +53,7 @@ export const ROUTES: Record<string, RouteItem> = {
   users: {
     id: "Utilizadores",
     icon: <Users className="w-6 h-6" />,
-    href: "/Users",
+    href: "/users",
   },
   Leads: {
     id: "Leads",

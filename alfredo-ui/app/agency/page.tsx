@@ -8,296 +8,134 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Skeleton } from "@/components/ui/skeleton"
+//import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useEffect, useState } from "react"
+import { BarChart, Bar, XAxis, ResponsiveContainer, Cell, ReferenceArea  } from "recharts"
 
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs"
-
-import { Button } from "@/components/ui/button"
-import { ArrowUp, ArrowDown, ArrowUpDown, LayoutGrid, List, Search } from "lucide-react"
-import { CompanyRow } from "@/components/company-row"
-import { useState } from "react"
-
-const rankingData = [
-  {
-    logo: "/assets/core-investments-logo.png",
-    name: "Core Investments",
-    activity: 806671,
-    rank: 1,
-  },
-  {
-    logo: "/assets/avatar.png",
-    name: "Alfredo AI Trial test",
-    activity: 371272,
-    rank: 2,
-  },
-  {
-    logo: "/assets/doutor-finanças-logo.PNG",
-    name: "Doutor Finanças",
-    activity: 59191,
-    rank: 3,
-  },
-  {
-    logo: "/assets/properstar.png",
-    name: "Properstar Portugal",
-    activity: 37151,
-    rank: 4,
-  },
-  {
-    logo: "/assets/iad-espanha-logo.png",
-    name: "iad Espana",
-    activity: 25054,
-    rank: 5,
-  },
+const chartData = [
+  { name: "julho", ativos: 90, angariados: 15, vendidos: 10, perdido: 5, highlight: 1 },
+  { name: "agosto", ativos: 60, angariados: 5, vendidos: 3, perdido: 2, highlight: 1 },
+  { name: "setembro", ativos: 70, angariados: 10, vendidos: 5, perdido: 3, highlight: 1 },
+  { name: "outubro", ativos: 80, angariados: 12, vendidos: 6, perdido: 4, highlight: 1 },
+  { name: "novembro", ativos: 75, angariados: 9, vendidos: 4, perdido: 3, highlight: 1 },
+  { name: "dezembro", ativos: 85, angariados: 11, vendidos: 5, perdido: 2, highlight: 1 },
+  { name: "janeiro", ativos: 82, angariados: 10, vendidos: 6, perdido: 4, highlight: 1 },
+  { name: "fevereiro", ativos: 65, angariados: 8, vendidos: 4, perdido: 2, highlight: 1 },
+  { name: "março", ativos: 58, angariados: 7, vendidos: 3, perdido: 2, highlight: 1 },
+  { name: "abril", ativos: 40, angariados: 4, vendidos: 2, perdido: 1, highlight: 1 },
+  { name: "maio", ativos: 52, angariados: 6, vendidos: 3, perdido: 2, highlight: 1 },
+  { name: "junho", ativos: 30, angariados: 3, vendidos: 1, perdido: 1, highlight: 1 },
+  { name: "julho", ativos: 12, angariados: 2, vendidos: 1, perdido: 0, highlight: 1 },
 ]
 
-export function RankingTable() {
+export default function AgencySummaryPage() {
+  const [loading, setLoading] = useState(true)
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState<number | null>(null)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setLoading(false), 1000)
+    return () => clearTimeout(timeout)
+  }, [])
+
+  const selected = selectedMonthIndex !== null
+    ? chartData[selectedMonthIndex]
+    : chartData[0]
+
   return (
-    <div className="space-y-2 mt-4">
-      {/* Header Row */}
-      <div className="grid grid-cols-[1fr_auto] items-center bg-white px-6 py-4 rounded-xl shadow-sm text-sm font-semibold ">
-        <div className="ml-15 font-semibold">Nome</div>
-        <div className="text-right ">Ranking</div>
+    <div className="p-6 ml-6 space-y-6">
+      <div>
+        <h1 className="text-2xl font-semibold mb-1">Agência</h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Início</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Definições</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
 
-      {/* Company Rows */}
-      {rankingData.map((company) => (
-        <div
-          key={company.rank}
-          className="grid grid-cols-[1fr_auto] items-center bg-white px-6 py-4 rounded-xl shadow-sm text-sm"
-        >
-          {/* Left side (logo, name, activity) */}
-          <div className="flex items-center gap-4">
-            {/* Logo with badge */}
-            <div className="relative w-10 h-10">
-              <img src={company.logo} alt="Logo" className="w-10 h-10 object-contain" />
-              <div
-                className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center font-semibold text-white ${
-                  company.rank === 1
-                    ? "bg-yellow-400"
-                    : company.rank === 2
-                    ? "bg-gray-400"
-                    : company.rank === 3
-                    ? "bg-orange-400"
-                    : "bg-red-400"
-                }`}
-              >
-                {company.rank}
-              </div>
-            </div>
-
-            {/* Name + Activity */}
-            <div>
-              <p className="font-semibold">{company.name}</p>
-              <p className="text-xs text-muted-foreground">
-                Atividade: {company.activity.toLocaleString()}
-              </p>
-            </div>
-          </div>
-
-          {/* Right side (ranking text) */}
-          <div className="text-right text-sm font-semibold text-muted-foreground">
-            {company.rank}# Posição
-          </div>
-        </div>
-      ))}
-
-    </div>
-  )
-}
-
-
-export default function GroupPage() {
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const totalItems = 500; 
-  const currentPage = 1; 
-
-  const companies = [
-    {
-      logo: "/assets/iad-portugal-logo.png",
-      name: "iad Portugal",
-      subtitle: "Empresa",
-      activity: "---",
-      members: "1025",
-      limitPercent: 100,
-    },
-    {
-      logo: "/assets/iad-espanha-logo.png",
-      name: "iad Espana",
-      subtitle: "Empresa",
-      activity: "---",
-      members: "714",
-      limitPercent: 100,
-    },
-    {
-      logo: "/assets/remax-portugal.png",
-      name: "RE/MAX Portugal",
-      subtitle: "Empresa",
-      activity: "---",
-      members: "141",
-      limitPercent: 100,
-    },
-    {
-      logo: "/assets/Century-21-logo.png",
-      name: "CENTURY 21 Portugal",
-      subtitle: "Empresa",
-      activity: "---",
-      members: "132",
-      limitPercent: 100,
-    },
-    {
-      logo: "/assets/noow.jpg",
-      name: "NOOW",
-      subtitle: "Empresa",
-      activity: "---",
-      members: "137",
-      limitPercent: 100,
-    },
-  ]
-
-  const sortedCompanies = [...companies].sort((a, b) => {
-  const aMembers = parseInt(a.members.split("/")[0].trim(), 10)
-  const bMembers = parseInt(b.members.split("/")[0].trim(), 10)
-
-  return sortOrder === "asc" ? aMembers - bMembers : bMembers - aMembers
-  })
-
-  const start = (currentPage - 1) * rowsPerPage + 1;
-  const end = Math.min(currentPage * rowsPerPage, totalItems);
-
-  return (
-    <div className="p-6 space-y-6 ml-6">
-      <h1 className="text-2xl font-semibold">Agência</h1>
-
-      {/* Breadcrumb */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Início</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Agência</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-
-
-      {/* Tabs */}
-      <Tabs defaultValue="overview" className="space-y-4">
+      <Tabs defaultValue="summary" className="space-y-4">
         <TabsList className="bg-transparent flex gap-2 w-fit h-12">
-          <TabsTrigger
-            value="overview"
-            className="data-[state=active]:bg-black data-[state=active]:text-white 
-                      bg-transparent text-muted-foreground px-4 py-2 rounded-md 
-                      transition-colors text-sm font-medium"
-          >
+          <TabsTrigger value="summary" className="data-[state=active]:bg-black data-[state=active]:text-white px-4 py-2 rounded-md text-sm font-medium">
             Sumário
           </TabsTrigger>
-          <TabsTrigger
-            value="activities"
-            className="data-[state=active]:bg-black data-[state=active]:text-white 
-                      bg-transparent text-muted-foreground px-4 py-2 rounded-md 
-                      transition-colors text-sm font-medium"
-          >
-            Ativatide
+          <TabsTrigger value="activity" className="px-4 py-2 rounded-md text-sm font-medium">
+            Atividade
           </TabsTrigger>
-          <TabsTrigger
-            value="ranking"
-            className="data-[state=active]:bg-black data-[state=active]:text-white 
-                      bg-transparent text-muted-foreground px-4 py-2 rounded-md 
-                      transition-colors text-sm font-medium"
-          >
+          <TabsTrigger value="ranking" className="px-4 py-2 rounded-md text-sm font-medium">
             Ranking
           </TabsTrigger>
         </TabsList>
 
-        {/* Companies List */}
-        <TabsContent value="overview">
-          <div className="space-y-4">
-            {/* Table Header */}
-            <div className="flex items-center justify-between px-2 pt-2">
-              <h2 className="text-lg font-semibold text-foreground">Empresas</h2>
-
-              {/* Right icons */}
-              <div className="flex items-center gap-4 text-muted-foreground">
-                <button className="hover:text-foreground">
-                  <ArrowUpDown className="w-5 h-5 opacity-50" />
-                </button>
-                <button className="hover:text-foreground">
-                  <LayoutGrid className="w-5 h-5 opacity-50" />
-                </button>
-                <button className="hover:text-foreground">
-                  <List className="w-5 h-5 text-foreground" />
-                </button>
-                <button className="hover:text-foreground">
-                  <Search className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Column Titles */}
-            <div className="grid grid-cols-[4fr_1.5fr_1fr_1fr_80px] items-center bg-white dark:bg-muted px-6 py-4 rounded-xl shadow-sm text-sm mr-8">
-              <div className="ml-15 font-semibold">Nome</div>
-              <div className="font-semibold text-right">Atividade</div>
-              <button
-                onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                className="font-semibold text-right flex items-center justify-end gap-1"
-              >
-                Membros {sortOrder === "asc" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-              </button>
-              <div className="font-semibold text-center">Limite</div>
-              <div className="font-semibold text-right">Ações</div>
-            </div>
-
-            {/* Company Rows */}
-            {sortedCompanies.map((company, index) => (
-              <CompanyRow key={index} {...company} />
-            ))}
+        <TabsContent value="summary">
+          <div className="flex items-center  mb-4">
+            <h2 className="text-base font-semibold">Sumário</h2>
+            <select className="ml-2 text-base px-1 py-0.5 bg-transparent outline-none">
+                <option>Ano</option>
+                <option>Mês</option>
+                <option>Semana</option>
+            </select>
           </div>
 
-          {/* Pagination Footer */}
-          <div className="mt-6 flex justify-end px-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-6">
-              {/* Rows per page */}
-              <div>
-                Rows per page:
-                <select
-                  className="ml-2 border rounded px-1 py-0.5"
-                  value={rowsPerPage}
-                  onChange={(e) => setRowsPerPage(Number(e.target.value))}
-                >
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  <option value={25}>25</option>
-                  <option value={50}>50</option>
-                </select>
+          <div className="rounded-xl bg-white p-6 shadow-sm mr-8">
+            <p className="text-sm font-bold uppercase ">Nível de Atividade</p>
+            {loading ? (
+              <div className="mt-4 space-y-3">
+                <Skeleton className="h-6 w-32" />
+                <Skeleton className="h-4 w-48" />
+                <Skeleton className="h-[200px] w-full mt-4" />
               </div>
+            ) : (
+              <>
+                {selectedMonthIndex === null ? (
+                  <p className="text-xl font-semibold">
+                    Total: {chartData.reduce((sum, item) => sum + item.ativos + item.angariados + item.vendidos + item.perdido, 0)}
+                  </p>
+                ) : (
+                  <p className="text-xl font-semibold text-muted-foreground">
+                    Ativos: {selected.ativos} Angariados: {selected.angariados} Vendidos: {selected.vendidos} Perdido: {selected.perdido}
+                  </p>
+                )}
 
-              {/* Pagination Info & Controls */}
-              <div className="flex items-center gap-2">
-                <span>{start}–{end} of {totalItems}</span>
-                <Button variant="ghost" size="icon">←</Button>
-                <Button variant="ghost" size="icon">→</Button>
-              </div>
-            </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {selectedMonthIndex !== null ? `${chartData[selectedMonthIndex].name}` : "julho, 2024 - julho, 2025"}
+                </p>
+
+                <ResponsiveContainer width="100%" height={240} className="border-none">
+                  <BarChart data={chartData}>
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} />
+                    {selectedMonthIndex !== null && (
+                      <ReferenceArea
+                        x1={chartData[selectedMonthIndex].name}
+                        x2={chartData[selectedMonthIndex].name}
+                        stroke="none"
+                        fill="#ccfbf1"
+                        fillOpacity={1}
+                      />
+                    )}
+                    <Bar dataKey="ativos" stackId="a" fill="#fbcfe8" barSize={40} onClick={(_, index) => setSelectedMonthIndex(index)}>
+                      {chartData.map((_, index) => (
+                        <Cell key={`ativos-${index}`} fill="#fbcfe8" />
+                      ))}
+                    </Bar>
+                    
+                    
+                    <Bar dataKey="angariados" stackId="a" fill="#f472b6" onClick={(_, index) => setSelectedMonthIndex(index)} />
+                    <Bar dataKey="vendidos" stackId="a" fill="#ec4899" onClick={(_, index) => setSelectedMonthIndex(index)} />
+                    <Bar dataKey="perdido" stackId="a" fill="#be185d" onClick={(_, index) => setSelectedMonthIndex(index)} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </>
+            )}
           </div>
-        </TabsContent>
-
-        <TabsContent value="activities">
-          <p>Sumário</p>
-        </TabsContent>
-
-        <TabsContent value="ranking">
-         
-          
         </TabsContent>
       </Tabs>
     </div>
   )
 }
-
